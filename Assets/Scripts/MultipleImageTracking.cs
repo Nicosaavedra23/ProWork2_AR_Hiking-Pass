@@ -33,7 +33,7 @@ public class MultipleImageTracking : MonoBehaviour
 
     private void OnDisable()
     {
-        trackedImageManager.trackedImagesChanged -= ImageChanged;
+        trackedImageManager.trackedImagesChanged += ImageChanged;
     }
 
     private void ImageChanged(ARTrackedImagesChangedEventArgs eventArgs) //allows u to call functionalities based on which image is being tracked/removed/updated
