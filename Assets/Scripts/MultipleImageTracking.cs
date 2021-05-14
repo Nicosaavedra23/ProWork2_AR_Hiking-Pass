@@ -8,9 +8,11 @@ using UnityEngine.XR.ARFoundation;
 [RequireComponent(typeof(ARTrackedImageManager))]
 public class MultipleImageTracking : MonoBehaviour
 {
-    [SerializeField] private GameObject[] placeablePrefabs; //our Prefabs
-    private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();  //will call sporned prefabs out of Prefab Array
-    private ARTrackedImageManager trackedImageManager;
+    [SerializeField] private GameObject[] placeablePrefabs; //our Prefabs, that will be created at runtime
+    
+    private Dictionary<string, GameObject> spawnedPrefabs = new Dictionary<string, GameObject>();  //will call sporned prefabs out of Prefab Array (string = used for finding a prefab from the placeable Prefab array with the same name
+    
+    private ARTrackedImageManager trackedImageManager; //contains the reference image library, detects the images in it
 
 
     private void Awake()
@@ -26,17 +28,17 @@ public class MultipleImageTracking : MonoBehaviour
         }
     }
 
-    private void OnEnable() //bind and unbind events to the TrackedImageChanged in the trackedImageManager
+    private void OnEnable() //bind events to the TrackedImageChanged in the trackedImageManager
     {
-        trackedImageManager.trackedImagesChanged += ImageChanged;
+        trackedImageManager.trackedImagesChanged += ImageChanged; //trackedImagesChanged: Invoked once per frame with information about the ARTrackedImages that have changed, i.e., been added, updated, or removed.
     }
 
-    private void OnDisable()
+    private void OnDisable() //unbind events to the TrackedImageChanged in the trackedImageManager
     {
-        trackedImageManager.trackedImagesChanged += ImageChanged;
+        trackedImageManager.trackedImagesChanged -= ImageChanged;
     }
 
-    private void ImageChanged(ARTrackedImagesChangedEventArgs eventArgs) //allows u to call functionalities based on which image is being tracked/removed/updated
+    private void ImageChanged(ARTrackedImagesChangedEventArgs eventArgs) //allows to call functionalities based on which image is being tracked/removed/updated
     {
         foreach (ARTrackedImage trackedImage in eventArgs.added) //each time an image is added
         {
@@ -57,10 +59,10 @@ public class MultipleImageTracking : MonoBehaviour
     private void UpdateImage(ARTrackedImage trackedImage)
     {
         string name = trackedImage.referenceImage.name; //temporarily store the name of the tracked image
-        Vector3 position = trackedImage.transform.position;
+        Vector3 position = trackedImage.transform.localPosition;
 
         GameObject prefab = spawnedPrefabs[name]; //GameObject will be from our spawnedPrefabs Dictionary selected by the name
-        prefab.transform.position = position;
+        prefab.transform.localPosition = position;
         prefab.SetActive(true); //see the prefab linked to the current image
 
         foreach (GameObject go in spawnedPrefabs.Values)

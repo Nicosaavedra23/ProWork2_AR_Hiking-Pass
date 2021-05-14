@@ -407,6 +407,7 @@ GameObject:
   - component: {fileID: 2079829993}
   - component: {fileID: 2079829992}
   - component: {fileID: 2079829995}
+  - component: {fileID: 2079829996}
   m_Layer: 0
   m_Name: AR Session Origin
   m_TagString: Untagged
@@ -464,11 +465,27 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2079829991}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb347e072a7c413c8720e27f97a1f8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placeablePrefabs:
+  - {fileID: 5237076822731311649, guid: aa127abb831e342dc82e0aa82de4972a, type: 3}
+  - {fileID: 8592495775466527396, guid: 8e82b1a55ddec4cd8a596adabcc7b4b0, type: 3}
+--- !u!114 &2079829996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079829991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f729788cbdb9f4bb5aa41399a5278978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedImageManager: {fileID: 0}
   placeablePrefabs:
   - {fileID: 5237076822731311649, guid: aa127abb831e342dc82e0aa82de4972a, type: 3}
   - {fileID: 8592495775466527396, guid: 8e82b1a55ddec4cd8a596adabcc7b4b0, type: 3}
